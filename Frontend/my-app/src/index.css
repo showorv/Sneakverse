@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+body{
+  background: #1A222C;
+  color: #FFFFFF;
+}
+
+
+/* goolge font  */
+
+.playfair{
+  font-family: "Playfair Display", serif;
+}
+
+.raleway{
+  font-family: "Raleway", serif;
+}
