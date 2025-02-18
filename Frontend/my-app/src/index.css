@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
+
 body{
-  background: #1A222C;
-  color: #FFFFFF;
+  background: #131313;
+  color: white;
 }
+
 
 
 /* goolge font  */
