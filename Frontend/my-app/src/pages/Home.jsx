@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import ShoeCardSlider from '../components/CommonFolder/ShoeCardSlider';
 import CollectionSec from '../components/CommonFolder/CollectionSec';
 import BestSell from '../components/CommonFolder/BestSell';
-import { FeatureSection } from '../components/CommonFolder/FeatureSection';
+
 
 
 export const Home = () => {
@@ -97,11 +97,9 @@ export const Home = () => {
       <BestSell />
     </div>
 
-    {/* feature section  */}
+  
 
-    <div className='mt-10'>
-      <FeatureSection />
-    </div>
+  
 
     </section>
   )

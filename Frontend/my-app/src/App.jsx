@@ -7,6 +7,9 @@ import { About } from './pages/About'
 import { Contact } from './pages/Contact'
 import { Products } from './pages/Products'
 import { ProductDetails } from './components/CommonFolder/ProductDetails'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
+import { UserProfile } from './pages/UserProfile'
 
 export const App = () => {
 
@@ -38,6 +41,19 @@ export const App = () => {
           path:"/productDetails",
           element: <ProductDetails />
         },
+        {
+          path:"/userlogin",
+          element: <Login />
+        },
+        {
+          path:"/userregister",
+          element: <Register />
+        },
+        {
+          path:"/userProfile",
+          element: <UserProfile />
+        },
+
       ]
     }
   ])
