@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import ShoeCardSlider from '../components/CommonFolder/ShoeCardSlider';
 import CollectionSec from '../components/CommonFolder/CollectionSec';
 import BestSell from '../components/CommonFolder/BestSell';
+import { FeatureSection } from '../components/CommonFolder/FeatureSection';
 
 
 export const Home = () => {
@@ -94,6 +95,12 @@ export const Home = () => {
         <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
       </div>
       <BestSell />
+    </div>
+
+    {/* feature section  */}
+
+    <div className='mt-10'>
+      <FeatureSection />
     </div>
 
     </section>
