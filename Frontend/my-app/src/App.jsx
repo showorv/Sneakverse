@@ -6,6 +6,7 @@ import { Home } from './pages/Home'
 import { About } from './pages/About'
 import { Contact } from './pages/Contact'
 import { Products } from './pages/Products'
+import { ProductDetails } from './components/CommonFolder/ProductDetails'
 
 export const App = () => {
 
@@ -32,6 +33,10 @@ export const App = () => {
         {
           path:"/products",
           element: <Products />
+        },
+        {
+          path:"/productDetails",
+          element: <ProductDetails />
         },
       ]
     }

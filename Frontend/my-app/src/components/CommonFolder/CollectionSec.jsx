@@ -49,7 +49,7 @@ const shoes = [
   }
 ];
 
-export default function ShoeCardSlider() {
+export default function CollectionSec() {
   return (
     <div className="container mx-auto p-4">
       <Swiper

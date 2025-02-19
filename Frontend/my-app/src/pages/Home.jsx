@@ -2,6 +2,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import ShoeCardSlider from '../components/CommonFolder/ShoeCardSlider';
+import CollectionSec from '../components/CommonFolder/CollectionSec';
+import BestSell from '../components/CommonFolder/BestSell';
 
 
 export const Home = () => {
@@ -66,8 +68,32 @@ export const Home = () => {
 
         </div>
 
-    <div>
+    {/* shipment section  */}
+    <div className='mt-10'>
+      <div className='flex flex-col justify-center items-center gap-2 mb-5'>
+        <h1 className='text-2xl font-bold playfair  md:text-4xl'>Our new Shippment</h1>
+        <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
+      </div>
       <ShoeCardSlider />
+    </div>
+
+    {/* collection section  */}
+
+    <div className='mt-10'>
+      <div className='flex flex-col justify-center items-center gap-2 mb-5'>
+        <h1 className='text-2xl font-bold playfair  md:text-4xl'>Our Collection</h1>
+        <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
+      </div>
+      <CollectionSec />
+    </div>
+   
+    {/* best selling shoes */}
+    <div className='mt-10'>
+      <div className='flex flex-col justify-center items-center gap-2 mb-5'>
+        <h1 className='text-2xl font-bold playfair  md:text-4xl'>Best Seller</h1>
+        <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
+      </div>
+      <BestSell />
     </div>
 
     </section>
