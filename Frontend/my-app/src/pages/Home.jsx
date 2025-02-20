@@ -60,7 +60,7 @@ export const Home = () => {
     variants={sectionVariants}
     custom={4}
   >
-    <NavLink to="/products">
+    <NavLink to="/products/all">
       <button className='bg-blue-950 px-10 py-1 rounded-md cursor-pointer text-lg text-center'>Shop now</button>
     </NavLink>
   </motion.div>

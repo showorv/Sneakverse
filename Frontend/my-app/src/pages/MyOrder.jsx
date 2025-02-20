@@ -90,7 +90,7 @@ export const MyOrder = () => {
 
                                             <td className='py-2 px-2 sm:py-4 sm:px-4'>
                                                 <span className={` ${elem.isPaid ? "bg-green-800 px-3 py-0.5 rounded-lg " : "bg-red-800 text-white px-3 py-0.5 rounded-lg"}`}>
-                                                    {elem.isPaid ? "Paid" : "Due"}
+                                                    {elem.isPaid ? "Paid" : "Pending"}
                                                 </span>
                                             </td>
                                         </tr>

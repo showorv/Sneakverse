@@ -34,7 +34,7 @@ export const App = () => {
           element: <Contact />
         },
         {
-          path:"/products",
+          path:"/products/:product",  //for use filter in url 
           element: <Products />
         },
         {
