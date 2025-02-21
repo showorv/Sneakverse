@@ -12,7 +12,8 @@ export const CartContents = () => {
           price: 59.99,
           quantity: 2,
           image: "https://picsum.photos/200?random=1",
-          size: "41"
+          size: "41",
+          type: 'collection'
         },
         {
           id: 2,
@@ -20,7 +21,8 @@ export const CartContents = () => {
           price: 199.99,
           quantity: 1,
           image: "https://picsum.photos/200?random=1",
-          size: "41"
+          size: "41",
+          type: 'preorder'
         },
         {
           id: 3,
@@ -28,7 +30,8 @@ export const CartContents = () => {
           price: 29.99,
           quantity: 1,
           image: "https://picsum.photos/200?random=1",
-          size: "41"
+          size: "41",
+          type: 'preorder'
         },
         {
           id: 4,
@@ -36,9 +39,12 @@ export const CartContents = () => {
           price: 49.99,
           quantity: 1,
           image: "https://picsum.photos/200?random=1",
-          size: "41"
+          size: "41",
+          type: 'preorder'
         },
       ];
+
+   
   return (
     <div>
         {cartcomponents.map((curElem, index)=>{
@@ -73,6 +79,7 @@ export const CartContents = () => {
                     </div>
 
                     <div>
+                    <p className='text-black text-md font-light'>Type: {curElem.type === 'preorder' ? 'Pre-Order' : 'Collection'}</p>
                         <p className='text-black font-medium'>$ {curElem.price.toLocaleString()}</p>
                         <button>
                         <RiDeleteBin5Line className='h-6 w-5 text-red-400 hover:text-gray-800 cursor-pointer'/>

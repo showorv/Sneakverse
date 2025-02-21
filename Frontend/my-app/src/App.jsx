@@ -10,6 +10,7 @@ import { ProductDetails } from './components/CommonFolder/ProductDetails'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { UserProfile } from './pages/UserProfile'
+import { CheckoutPage } from './components/Cart/CheckoutPage'
 
 export const App = () => {
 
@@ -38,7 +39,7 @@ export const App = () => {
           element: <Products />
         },
         {
-          path:"/productDetails",
+          path:"/productDetails/:id",
           element: <ProductDetails />
         },
         {
@@ -52,6 +53,10 @@ export const App = () => {
         {
           path:"/userProfile",
           element: <UserProfile />
+        },
+        {
+          path:"/checkout",
+          element: <CheckoutPage />
         },
 
       ]

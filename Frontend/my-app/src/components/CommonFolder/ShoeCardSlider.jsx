@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import { Link } from 'react-router-dom';
 
 const shoes = [
   {
@@ -67,6 +68,7 @@ export default function ShoeCardSlider() {
       >
         {shoes.map((shoe) => (
           <SwiperSlide key={shoe.id}>
+            <Link to={`/productDetails/${shoe.id}`} >
             <div className="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col ">
               <img 
                 src={shoe.image} 
@@ -81,6 +83,7 @@ export default function ShoeCardSlider() {
                 ))}
               </div>
             </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
