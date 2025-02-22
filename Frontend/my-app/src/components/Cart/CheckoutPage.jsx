@@ -32,13 +32,18 @@ export const CheckoutPage = () => {
   
   const [deliveryCharge, setDeliveryCharge] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
+  const [cashOn, setCashOn] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('full');
 
   const handleDetails = (e) => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
     if (name === 'city') {
-      setDeliveryCharge(value.toLowerCase() === 'dhaka' ? 60 : 120);
+      if (value === '') { // If the user selects "Select Your City"
+        setDeliveryCharge(0);
+      } else {
+        setDeliveryCharge(value.toLowerCase() === 'dhaka' ? 60 : 120);
+      }
     }
   };
 
@@ -47,6 +52,10 @@ export const CheckoutPage = () => {
     setShowDetails(true);
   };
 
+  const handleCashOn = () => {
+    setCashOn(prev => !prev);
+    setPaymentMethod(prev => (prev === "cod" ? "full" : "cod"));
+  };
   // Calculate pre-order total (20% for preorder items)
   const preOrderTotal = products.reduce((total, product) => 
     product.type === 'preorder' ? total + (product.price * 0.2) : total, 0);
@@ -67,7 +76,7 @@ export const CheckoutPage = () => {
   
   if (paymentMethod === 'cod') {
     // Only include preorder total for COD (20% upfront)
-    totalPayable = preOrderTotal + collectionTotal + deliveryCharge;
+    totalPayable = preOrderTotal  + deliveryCharge;
   } else if (paymentMethod === 'full') {
     // Include both preorder (full 100% amount) and collection totals for full payment
     totalPayable = preOrderTotal + collectionTotal + deliveryCharge;
@@ -162,11 +171,11 @@ export const CheckoutPage = () => {
            <p>Delivery Charge: ${deliveryCharge}</p>
          
           <div>
-            <button value="cod" onClick={(e) => setPaymentMethod(e.target.value)}
-              className='bg-red-700 text-white px-3 py-1 rounded-md'>Cash On Delivery</button>
+            <button value="cod" onClick={handleCashOn}  
+              className={`${cashOn?"bg-red-700":"bg-gray-500"} text-white px-3 py-1 rounded-md cursor-pointer`}>Cash On Delivery</button>
 
-            <button value="full" onClick={(e) => setPaymentMethod(e.target.value)}
-              className='bg-red-700 text-white px-3 py-1 rounded-md'>Full payment</button>
+            {/* <button value="full" onClick={(e) => setPaymentMethod(e.target.value)}
+              className='bg-red-700 text-white px-3 py-1 rounded-md'>Full payment</button> */}
           </div>
 
           {paymentMethod && <p className='text-white mt-4'>Total Payable: ${totalPayable.toFixed(2)}</p>}
@@ -174,7 +183,7 @@ export const CheckoutPage = () => {
           {overallDue > 0 && <p className='text-white mt-4'>Overall Due: ${overallDue.toFixed(2)}</p>}
 
         </div>
-        <button className={`mt-4 py-2 px-4 rounded w-full bg-green-500 text-white`} disabled={!showDetails}>Proceed to Payment</button>
+        <button className={`mt-4 py-2 px-4 rounded w-full ${showDetails? "bg-green-500":"bg-gray-700"}  text-white`} disabled={!showDetails}>Proceed to Payment</button>
       </div>
     </div>
   );

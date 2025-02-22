@@ -11,6 +11,7 @@ import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 import { UserProfile } from './pages/UserProfile'
 import { CheckoutPage } from './components/Cart/CheckoutPage'
+import { OrderConfirmPage } from './components/Cart/OrderConfirmPage'
 
 export const App = () => {
 
@@ -57,6 +58,10 @@ export const App = () => {
         {
           path:"/checkout",
           element: <CheckoutPage />
+        },
+        {
+          path:"/confirmOrder",
+          element: <OrderConfirmPage />
         },
 
       ]
