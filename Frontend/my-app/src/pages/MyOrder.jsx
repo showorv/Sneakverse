@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const MyOrder = () => {
     const [order, setOrder] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         setTimeout(() => {
@@ -42,6 +44,10 @@ export const MyOrder = () => {
         }, 1000);
     }, [])
 
+    const handleRowClick =(productID)=>{
+            navigate(`/order/${productID}`)
+    }
+
     return (
         <div className='max-w-7xl mx-auto p-4 sm:p-6'>
             <h2 className='text-xl sm:text-2xl font-bold mb-6'>My Orders</h2>
@@ -64,7 +70,9 @@ export const MyOrder = () => {
                             {order.length > 0 ? (
                                 order.map((elem) => {
                                     return (
-                                        <tr key={elem._id} className='border-b border-gray-700 cursor-pointer'>
+                                        <tr key={elem._id} className='border-b border-gray-700 cursor-pointer'
+                                        onClick={()=> handleRowClick(elem._id)}
+                                        >
                                             <td className='py-2 px-2 sm:py-4 sm:px-4'>
                                                 <img src={elem.orderItems[0].image} alt={elem.orderItems[0].name}
                                                     className='w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg' />

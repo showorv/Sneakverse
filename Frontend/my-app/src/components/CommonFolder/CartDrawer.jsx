@@ -12,6 +12,7 @@ export const CartDrawer = ({drawerOpen, handleToggleDrawer}) => {
     // }
     const navigate = useNavigate()
     const handleCheckout = ()=>{
+      handleToggleDrawer()
       navigate("/checkout")
     }
   return (

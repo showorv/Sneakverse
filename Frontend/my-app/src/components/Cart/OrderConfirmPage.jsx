@@ -79,6 +79,7 @@ export const OrderConfirmPage = () => {
                     {/* payment history  */}
 
                     <h2 className='text-black '>Payment:</h2>
+                    <p className='text-black '>Address:</p>
                 </div>
 
             </div>
