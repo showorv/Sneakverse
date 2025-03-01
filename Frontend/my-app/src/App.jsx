@@ -14,6 +14,7 @@ import { CheckoutPage } from './components/Cart/CheckoutPage'
 import { OrderConfirmPage } from './components/Cart/OrderConfirmPage'
 import { OrderDetails } from './components/CommonFolder/OrderDetails'
 import { MyOrder } from './pages/MyOrder'
+import { AdminLayout } from './components/Admin/AdminLayout'
 
 export const App = () => {
 
@@ -70,9 +71,17 @@ export const App = () => {
           element: <OrderConfirmPage />
         },
         {
-          path:"order/:id",
+          path:"/order/:id",
           element:<OrderDetails />
+        },
+
+        //admin
+        {
+          path:"/admin",
+          element:<AdminLayout />
+
         }
+
 
       ]
     }

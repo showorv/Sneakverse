@@ -54,6 +54,13 @@ export const Header = () => {
     {/* icons side */}
 
     <div className='flex justify-center items-center space-x-4'>
+      
+      <div className='hidden md:block'>
+
+      <NavLink to="/admin" className="bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"
+        style={active}  
+        >Admin</NavLink>
+      </div>
       <NavLink to="/userprofile" >
       <FaRegUser className="h-5 w-5"/>
       </NavLink>
@@ -65,6 +72,7 @@ export const Header = () => {
 
       {/* search */}
     <Search />
+    
 
       <button onClick={handleHambarOpen}>
       <CgMenuLeft className="h-5 w-5 md:hidden" />
@@ -94,6 +102,13 @@ export const Header = () => {
     <NavLink to="/products" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Products</NavLink>
     <NavLink to="/about" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>About Us</NavLink>
     <NavLink to="/contact" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Contact us</NavLink>
+    <NavLink to="/admin" className="bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"   
+    style={active}
+    onClick={handleHambarOpen}
+    >Admin</NavLink>
+      
+
+   
     </div>
 
     </div>
