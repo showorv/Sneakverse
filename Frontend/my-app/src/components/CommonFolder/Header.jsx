@@ -57,7 +57,7 @@ export const Header = () => {
       
       <div className='hidden md:block'>
 
-      <NavLink to="/admin" className="bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"
+      <NavLink to="/admin" className="block bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"
         style={active}  
         >Admin</NavLink>
       </div>
@@ -102,7 +102,7 @@ export const Header = () => {
     <NavLink to="/products" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Products</NavLink>
     <NavLink to="/about" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>About Us</NavLink>
     <NavLink to="/contact" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Contact us</NavLink>
-    <NavLink to="/admin" className="bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"   
+    <NavLink to="/admin" className="block bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"   
     style={active}
     onClick={handleHambarOpen}
     >Admin</NavLink>

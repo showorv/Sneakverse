@@ -76,14 +76,17 @@ export const App = () => {
         },
 
         //admin
-        {
-          path:"/admin",
-          element:<AdminLayout />
-
-        }
+        
 
 
-      ]
+      ],
+     
+    },
+    //admin route
+    {
+      path:"/admin",
+      element:<AdminLayout />
+
     }
   ])
   return (
