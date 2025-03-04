@@ -22,10 +22,13 @@ export const AdminSidebar = () => {
             <Link to="/admin" className='text-md md:text-2xl font-medium '>SneakVerse</Link>
 
         </div>
+        <NavLink to="/admin/adminhome">
+
         <h2 className='text-md md:text-lg font-medium mb-6 text-center'>Admin Dashboard</h2>
+        </NavLink>
 
         <nav className='flex flex-col space-y-2'>
-            <NavLink to="/admin/user"
+            <NavLink to="/admin/users"
             className={({isactive})=> isactive?"bg-gray-700 text-white py-2 px-3 rounded flex items-center space-x-2":" text-gray-300 hover:bg-gray-700 hover:text-white py-2 px-3 flex items-center space-x-2 rounded"}>
                 <CiUser size={20} />
                 <span>Users</span>

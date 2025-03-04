@@ -15,6 +15,8 @@ import { OrderConfirmPage } from './components/Cart/OrderConfirmPage'
 import { OrderDetails } from './components/CommonFolder/OrderDetails'
 import { MyOrder } from './pages/MyOrder'
 import { AdminLayout } from './components/Admin/AdminLayout'
+import { AdminHome } from './pages/AdminHome'
+import { UserManage } from './components/Admin/UserManage'
 
 export const App = () => {
 
@@ -85,7 +87,17 @@ export const App = () => {
     //admin route
     {
       path:"/admin",
-      element:<AdminLayout />
+      element:<AdminLayout />,
+      children:[
+        {
+          path:"adminhome",
+          element:<AdminHome />
+        },
+        {
+          path:"users",
+          element:<UserManage />
+        },
+      ]
 
     }
   ])
