@@ -17,6 +17,7 @@ import { MyOrder } from './pages/MyOrder'
 import { AdminLayout } from './components/Admin/AdminLayout'
 import { AdminHome } from './pages/AdminHome'
 import { UserManage } from './components/Admin/UserManage'
+import { ProductManege } from './components/Admin/ProductManege'
 
 export const App = () => {
 
@@ -96,6 +97,10 @@ export const App = () => {
         {
           path:"users",
           element:<UserManage />
+        },
+        {
+          path:"products",
+          element:<ProductManege />
         },
       ]
 

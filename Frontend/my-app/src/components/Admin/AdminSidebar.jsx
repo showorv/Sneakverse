@@ -34,7 +34,7 @@ export const AdminSidebar = () => {
                 <span>Users</span>
 
             </NavLink>
-            <NavLink to="/admin/user"
+            <NavLink to="/admin/products"
             className={({isactive})=> isactive?"bg-gray-700 text-white py-2 px-3 rounded flex items-center space-x-2":" text-gray-300 hover:bg-gray-700 hover:text-white py-2 px-3 flex items-center space-x-2 rounded"}>
                 <AiOutlineProduct size={20}/>
 
