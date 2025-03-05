@@ -57,7 +57,7 @@ export const Header = () => {
       
       <div className='hidden md:block'>
 
-      <NavLink to="/admin" className="block bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"
+      <NavLink to="/admin/adminhome" className="block bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"
         style={active}  
         >Admin</NavLink>
       </div>

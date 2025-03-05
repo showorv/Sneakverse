@@ -19,7 +19,7 @@ export const AdminSidebar = () => {
   return (
     <div className='p-6'>
         <div className='mb-6'>
-            <Link to="/admin" className='text-md md:text-2xl font-medium '>SneakVerse</Link>
+            <Link to="/" className='text-md md:text-2xl font-medium '>SneakVerse</Link>
 
         </div>
         <NavLink to="/admin/adminhome">
@@ -59,7 +59,7 @@ export const AdminSidebar = () => {
 
         <div className='mt-6'>
             <button onClick={handleLogout}
-            className='bg-red-700 py-1 px-4 rounded text-center text-sm md:text-md flex items-center justify-center space-x-2'
+            className='bg-red-700 py-1 px-4 rounded text-center text-sm md:text-md flex items-center justify-center space-x-2 cursor-pointer'
             >
                 <FaSignOutAlt size={15}/>
                    <span>Logout</span> 
