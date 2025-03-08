@@ -41,14 +41,14 @@ export const AdminSidebar = () => {
                 <span>Products</span>
 
             </NavLink>
-            <NavLink to="/admin/user"
+            <NavLink to="/admin/orders"
             className={({isactive})=> isactive?"bg-gray-700 text-white py-2 px-3 rounded flex items-center space-x-2":" text-gray-300 hover:bg-gray-700 hover:text-white py-2 px-3 flex items-center space-x-2 rounded"}>
                 <CiBoxList size={20}/>
 
                 <span>Orders</span>
 
             </NavLink>
-            <NavLink to="/admin/user"
+            <NavLink to="/"
             className={({isactive})=> isactive?"bg-gray-700 text-white py-2 px-3 rounded flex items-center space-x-2":" text-gray-300 hover:bg-gray-700 hover:text-white py-2 px-3 flex items-center space-x-2 rounded"}>
                 <CiShoppingCart size={20}/>
                       <span>Shop</span>

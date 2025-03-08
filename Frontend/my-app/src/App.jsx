@@ -19,6 +19,7 @@ import { AdminHome } from './pages/AdminHome'
 import { UserManage } from './components/Admin/UserManage'
 import { ProductManege } from './components/Admin/ProductManege'
 import { EditProduct } from './components/Admin/EditProduct'
+import { OrderManage } from './components/Admin/OrderManage'
 
 export const App = () => {
 
@@ -106,6 +107,10 @@ export const App = () => {
         {
           path:"products/:id/edit",
           element:<EditProduct />
+        },
+        {
+          path:"orders",
+          element:<OrderManage />
         },
       ]
 
