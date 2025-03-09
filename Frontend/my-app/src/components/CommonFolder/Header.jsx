@@ -46,7 +46,7 @@ export const Header = () => {
 
     <div className='hidden md:flex space-x-6'>
     <NavLink to="/" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active}>Home</NavLink>
-    <NavLink to="/products" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active}>Products</NavLink>
+    <NavLink to="/products/all" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active}>Products</NavLink>
     <NavLink to="/about" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active}>About Us</NavLink>
     <NavLink to="/contact" className="text-sm font-medium uppercase playfair  hover:text-black" style={active}>Contact us</NavLink>
     </div>
