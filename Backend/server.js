@@ -1,9 +1,9 @@
 import  express  from "express";
 import cors from "cors";
 import 'dotenv/config'
-import { configDotenv } from "dotenv";
 import connectDB from "./config/db.js";
 import router from "./routes/userRoute.js";
+import productRoter from "./routes/productRoute.js"
 
 
 const app = express()
@@ -21,6 +21,10 @@ const PORT = process.env.PORT || 9000;
 //routes for user
 
 app.use( "/api/user", router)
+
+//routes for products
+app.use( "/api/products", productRoter)
+
 
 app.get("/" , (req,res)=>{
     res.send("hello backend")
