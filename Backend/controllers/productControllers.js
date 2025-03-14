@@ -1,3 +1,4 @@
+
 import Product from "../model/ProductModel.js";
 
 
@@ -10,7 +11,7 @@ const productsCreate = async (req,res) =>{
             price,
             discountPrice,
             countInStock,
-            catagory,
+            category,
             brand,
             sizes,
             colors,
@@ -29,7 +30,7 @@ const productsCreate = async (req,res) =>{
             price,
             discountPrice,
             countInStock,
-            catagory,
+            category,
             brand,
             sizes,
             colors,
@@ -98,4 +99,85 @@ const deleteProduct = async (req,res) =>{
 }
 
 
-export default {productsCreate, updateProduct, deleteProduct};
+// all products with filter
+
+const allProducts = async (req,res) =>{
+
+    try {
+        //for filter
+        const {brand,sizes,colors, category,collections, minPrice, maxPrice, search, sortBy,limit} = req.query;  
+
+
+        let query = {};
+
+        //filter logic
+
+        if( collections && collections.toLocaleLowerCase()!== "all"){
+            query.collection = collections
+        }
+        if( category && category.toLocaleLowerCase()!== "all"){
+            query.category = category
+        }
+
+        if(brand){
+            query.brand = {$in: brand.split(",")}
+        }
+        if(sizes){
+            query.size = {$in: sizes.split(",")}
+        }
+
+        if (colors) {
+            query.color = { $in: colors.split(",") }; 
+        }
+
+        if( minPrice || maxPrice){
+            query.price = {}
+            if(minPrice) query.price.$gte = Number(minPrice)
+            if(maxPrice) query.price.$lte = Number(maxPrice)
+        }
+
+        if(search){
+            query.$or = [
+                {name: {$regex: search, $options:"i"}},
+                {description: {$regex: search, $options:"i"}},
+            ]
+        }
+
+        let sort = {};
+        if(sortBy){
+            switch(sortBy){
+                case "priceAsc":
+                    sort = {price:1};
+                    break;
+
+                case "priceDesc":
+                    sort = {price: -1};
+                    break;
+                case "popularity":
+                    sort = {rating:-1};
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        //FETCH products and apply sorting and limit
+
+        let products = await Product.find(query).sort(sort).limit(Number(limit) || 0);
+
+        res.status(200).json(products)
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({messgs:"error in all products", error:error.message})
+    }
+}
+
+
+// get single product by Id 
+
+const singleProduct = async(req,res)=>{
+
+}
+
+export default {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct};
