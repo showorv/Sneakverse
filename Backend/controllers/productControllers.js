@@ -178,6 +178,18 @@ const allProducts = async (req,res) =>{
 
 const singleProduct = async(req,res)=>{
 
+    try {
+        
+        const product = await Product.findById(req.params.id)
+        if(product){
+            res.status(200).json(product)
+        }else{
+            res.status(404).json({mssgs:"No product found"})
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in singleproduct", error:error.message})
+    }
 }
 
 export default {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct};
