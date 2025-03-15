@@ -667,7 +667,7 @@ const products = [
         "Purple"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -743,7 +743,7 @@ const products = [
         "Blue"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -1009,7 +1009,7 @@ const products = [
         "Orange"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -1427,7 +1427,7 @@ const products = [
         "Purple"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -1579,7 +1579,7 @@ const products = [
         "White"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -1845,7 +1845,7 @@ const products = [
         "Red"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -2457,7 +2457,7 @@ const products = [
         "Pink"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -2495,7 +2495,7 @@ const products = [
         "Grey"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {
@@ -2571,7 +2571,7 @@ const products = [
         "Purple"
       ],
       "collections": [
-        "Stock"
+        "pre-order"
       ],
       "images": [
         {

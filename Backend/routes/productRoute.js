@@ -2,7 +2,7 @@ import { Router } from "express";
 import { userMiddleware } from "../middleware/User-middleware.js";
 import { adminMiddleware } from "../middleware/admin-middleware.js";
 import productControllers from "../controllers/productControllers.js";
-const {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct, similarProduct,bestSellerProduct} = productControllers;
+const {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct, similarProduct,bestSellerProduct,preOrderProducts,stockProducts,newArrival} = productControllers;
 
 
 const router = Router()
@@ -30,6 +30,16 @@ router.route("/").get(allProducts)
 //best seller product should not work after single product because of id
 
 router.route("/best-seller").get(bestSellerProduct)
+
+//pre order product 
+
+router.route("/pre-order").get(preOrderProducts)
+//stock product
+
+router.route("/stock").get(stockProducts)
+
+//new arrival
+router.route("/new-arrival").get(newArrival)
 
 //single product by id
 

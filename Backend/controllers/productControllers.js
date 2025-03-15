@@ -173,23 +173,9 @@ const allProducts = async (req,res) =>{
     }
 }
 
-// best seller with high rating
-// best seller not work after single product. it should be top of the singleproduct because of id.
 
-const bestSellerProduct = async (req,res)=>{
 
-    try {
-      const bestseller = await Product.find().sort({rating:-1}).limit(4)
-      if(bestseller){
-        res.json(bestseller)
-      }else{
-         res.status(404).json({mssgs:"No best seller found"})
-      }
-    } catch (error) {
-        console.error(error);
-        res.status(404).json({mssgs:"error in best seller", error:error.message})
-    }
-}
+
 
 // get single product by Id 
 
@@ -237,6 +223,66 @@ const similarProduct = async (req,res) =>{
     }
 }
 
+// best seller with high rating
+
+const bestSellerProduct = async (req,res)=>{
+
+    try {
+      const bestseller = await Product.find().sort({rating:-1}).limit(4)
+      if(bestseller){
+        res.json(bestseller)
+      }else{
+         res.status(404).json({mssgs:"No best seller found"})
+      }
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in best seller", error:error.message})
+    }
+}
+
+// n pre-order section for collection which equal pre-order
+
+const preOrderProducts = async( req,res)=>{
+
+    try {
+        const preorder = await Product.find({ collections: "pre-order" })
+
+        res.status(200).json(preorder)
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in pre order", error:error.message})
+    }
+}
 
 
-export default {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct,similarProduct, bestSellerProduct};
+// in stock
+
+
+const stockProducts = async( req,res)=>{
+
+    try {
+        const stockorder = await Product.find({ collections: "Stock" })
+
+        res.status(200).json(stockorder)
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in stock", error:error.message})
+    }
+}
+
+
+//new arrival for latest 8 products retrive from creation date
+
+const newArrival = async (req,res)=>{
+
+    try {
+        
+        const newProduct = await Product.find().sort({createdAt: -1}).limit(8);
+        res.status(200).json(newProduct)
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in new arrival", error:error.message})
+    }
+}
+
+export default {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct,similarProduct, bestSellerProduct,preOrderProducts,stockProducts, newArrival};
