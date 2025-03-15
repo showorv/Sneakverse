@@ -1,9 +1,9 @@
 import mongoose from "mongoose"
-import moongose, { mongo } from "mongoose"
+
 
 // cartItemSchema
 
-const cartItemSchema = new moongose.Schema({
+const cartItemSchema = new mongoose.Schema({
     productId:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Product",
@@ -44,6 +44,6 @@ const cartSchema = new mongoose.Schema({
 {timestamps:true})
 
 
-const CartItem = mongoose.model("CartItem", cartItemSchema)
+const CartItem = mongoose.model("CartItem",cartSchema)
 
 export default CartItem
