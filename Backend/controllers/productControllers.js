@@ -173,6 +173,23 @@ const allProducts = async (req,res) =>{
     }
 }
 
+// best seller with high rating
+// best seller not work after single product. it should be top of the singleproduct because of id.
+
+const bestSellerProduct = async (req,res)=>{
+
+    try {
+      const bestseller = await Product.find().sort({rating:-1}).limit(4)
+      if(bestseller){
+        res.json(bestseller)
+      }else{
+         res.status(404).json({mssgs:"No best seller found"})
+      }
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in best seller", error:error.message})
+    }
+}
 
 // get single product by Id 
 
@@ -192,4 +209,34 @@ const singleProduct = async(req,res)=>{
     }
 }
 
-export default {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct};
+
+// similar products retrive based on the current products catagory and gender(if) brand
+
+const similarProduct = async (req,res) =>{
+
+    const {id} = req.params;
+   
+    try {
+        
+        const product = await Product.findById(id);
+
+        if(!product){
+            return res.status(404).json({mssgs:"Product not found"})
+        }
+
+        const similarProducts = await Product.find({
+            _id: {$ne: id}, //exclude the current product
+            category: product.category,
+            brand: product.brand
+        }).limit(4);
+
+        res.status(200).json(similarProducts)
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in similar product", error:error.message})
+    }
+}
+
+
+
+export default {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct,similarProduct, bestSellerProduct};

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { userMiddleware } from "../middleware/User-middleware.js";
 import { adminMiddleware } from "../middleware/admin-middleware.js";
 import productControllers from "../controllers/productControllers.js";
-const {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct} = productControllers;
+const {productsCreate, updateProduct, deleteProduct,allProducts,singleProduct, similarProduct,bestSellerProduct} = productControllers;
 
 
 const router = Router()
@@ -26,9 +26,20 @@ router.route("/:id").delete(userMiddleware,adminMiddleware,deleteProduct)
 
 router.route("/").get(allProducts)
 
+//bestseller product 
+//best seller product should not work after single product because of id
+
+router.route("/best-seller").get(bestSellerProduct)
+
 //single product by id
 
 router.route("/:id").get(singleProduct)
+
+// similar product with id
+
+router.route("/similar/:id").get(similarProduct)
+
+
 
 
 export default router

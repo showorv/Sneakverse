@@ -1897,7 +1897,8 @@ const products = [
       ],
       "isFeatured": true,
       "isPublished": true,
-      "sku": "Product-50-SKU"
+      "sku": "Product-50-SKU",
+      "rating":4
     },
     {
       "name": "Product 51",
@@ -1935,7 +1936,8 @@ const products = [
       ],
       "isFeatured": false,
       "isPublished": true,
-      "sku": "Product-51-SKU"
+      "sku": "Product-51-SKU",
+      "rating":3
     },
     {
       "name": "Product 52",
@@ -2011,7 +2013,8 @@ const products = [
       ],
       "isFeatured": false,
       "isPublished": true,
-      "sku": "Product-53-SKU"
+      "sku": "Product-53-SKU",
+      "rating":2
     },
     {
       "name": "Product 54",
@@ -2087,7 +2090,8 @@ const products = [
       ],
       "isFeatured": false,
       "isPublished": true,
-      "sku": "Product-55-SKU"
+      "sku": "Product-55-SKU",
+      "rating":4
     },
     {
       "name": "Product 56",
