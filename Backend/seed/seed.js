@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import 'dotenv/config'
 import Product from "../model/ProductModel.js";
 import User from "../model/UserModel.js";
+import CartItem from "../model/CartModel.js";
 import products from "./product.js";
 
 
@@ -17,7 +18,7 @@ const seedData = async () =>{
 
         await Product.deleteMany()
         await User.deleteMany()
-
+        await CartItem.deleteMany()
 
         // create default admin User
 
