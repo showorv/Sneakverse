@@ -74,7 +74,7 @@ const cartProduct = async (req,res)=>{
             const newCart = await CartItem.create({
                 
                 user: userId ? userId : undefined, 
-                 guestId:guestId?guestId: "guest_" + new Date().getTime(),
+                guestId:guestId?guestId: "guest_" + new Date().getTime(),
                 products:[
                     {
                         productId,
@@ -100,4 +100,95 @@ const cartProduct = async (req,res)=>{
 }
 
 
-export default {cartProduct};
+// update product quantity in the cart for guest or logged in
+
+const updateCart = async (req,res)=>{
+
+    const {productId, quantity,size,color, guestId,userId} = req.body
+
+    try {
+        
+        let cart = await getCart(guestId,userId)
+
+        if(!cart){
+            return res.status(404).json({mssgs:"cart not found"})
+        }
+
+        const productIndex = cart.products.findIndex((p)=> 
+        p.productId.toString() === productId &&
+        p.color === color &&
+        p.size === size
+        )
+
+
+        if(productIndex >-1){
+            //update quantity
+
+            if( quantity >0){
+                cart.products[productIndex]. quantity = quantity;
+            }else{
+                cart.products.splice( productIndex,1) // to remove the item if quantity is 0
+            }
+
+            cart.totalPrice = cart.products.reduce((acc,item)=> acc+ item.price * item.quantity,0);
+
+            await cart.save()
+            res.status(200).json(cart)
+        }else{
+            return res.status(404).json({mssgs: "product not found in cart"})
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in update cart", error:error.message})
+    }
+}
+
+
+// delete product from cart
+
+const deleteProduct = async (req,res)=>{
+    const {productId, quantity,size,color, guestId,userId} = req.body
+
+    try {
+
+        let cart = await getCart(guestId,userId)
+
+        if(!cart){
+            return res.status(404).json({mssgs:"cart not found"})
+        }
+
+        const productIndex = cart.products.findIndex((p)=> 
+        p.productId.toString() === productId &&
+        p.color === color &&
+        p.size === size
+        )
+
+
+        if(productIndex >-1){
+          
+          cart.products.splice( productIndex,1) 
+            
+
+            cart.totalPrice = cart.products.reduce((acc,item)=> acc+ item.price * item.quantity,0);
+
+            await cart.save()
+            res.status(200).json(cart)
+        }else{
+            return res.status(404).json({mssgs: "product not found in cart"})
+        }
+        
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({mssgs:"error in delete cart", error:error.message})
+    }
+}
+
+
+//displaying cart on log or guest user
+
+
+
+
+
+
+export default {cartProduct, updateCart,deleteProduct};
