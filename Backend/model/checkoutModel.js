@@ -63,7 +63,7 @@ const checkoutSchema = new mongoose.Schema({
 
     paymentStatus:{
         type: String,
-        enum: ["pending", "completed", "failed"],
+        enum: ["pending", "paid", "failed"],
         default: "pending"
     },
 
@@ -89,6 +89,6 @@ const checkoutSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 
-const checkoutSchemas = mongoose.model("Checkout", checkoutSchema)
+const Checkout = mongoose.model("Checkout", checkoutSchema)
 
-export default checkoutSchemas;
+export default Checkout;

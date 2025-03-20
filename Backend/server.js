@@ -5,7 +5,7 @@ import connectDB from "./config/db.js";
 import router from "./routes/userRoute.js";
 import productRoter from "./routes/productRoute.js"
 import cartRouter from "./routes/cartRoute.js"
-
+import checkoutRouter from "./routes/checkoutRoute.js"
 
 const app = express()
 
@@ -30,6 +30,9 @@ app.use( "/api/products", productRoter)
 
 app.use("/api/cart",cartRouter)
 
+// routes for checkout
+
+app.use("/api/checkout",checkoutRouter)
 
 app.get("/" , (req,res)=>{
     res.send("hello backend")
