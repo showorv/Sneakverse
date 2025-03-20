@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { userMiddleware } from "../middleware/User-middleware.js";
 import CartControllers from "../controllers/CartControllers.js";
-const {cartProduct,updateCart,deleteProduct} = CartControllers
+const {cartProduct,updateCart,deleteProduct,displayCart,mergeCart} = CartControllers
 
 const router = Router()
 
@@ -18,6 +18,12 @@ router.route("/").put(updateCart)
 
 router.route("/").delete(deleteProduct)
 
+//display cart
 
+router.route("/").get(displayCart)
+
+// merge cart. private
+
+router.route("/merge").post(userMiddleware,mergeCart)
 
 export default router
