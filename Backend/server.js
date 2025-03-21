@@ -6,6 +6,8 @@ import router from "./routes/userRoute.js";
 import productRoter from "./routes/productRoute.js"
 import cartRouter from "./routes/cartRoute.js"
 import checkoutRouter from "./routes/checkoutRoute.js"
+import orderRouter from "./routes/orderRoute.js"
+import uploadRouter from "./routes/uploadRoute.js"
 
 const app = express()
 
@@ -33,6 +35,14 @@ app.use("/api/cart",cartRouter)
 // routes for checkout
 
 app.use("/api/checkout",checkoutRouter)
+
+// routes for order
+
+app.use("/api/order",orderRouter)
+
+/// image upload of cloudinary
+
+app.use("/api/upload", uploadRouter)
 
 app.get("/" , (req,res)=>{
     res.send("hello backend")

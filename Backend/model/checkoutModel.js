@@ -19,6 +19,10 @@ const checkoutItemSchema = new mongoose.Schema({
     price:{
         type:Number,
         required: true
+    },
+    quantity:{
+        type: Number,
+        required: true
     }
 },
 {_id: false}
@@ -71,10 +75,10 @@ const checkoutSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.Mixed 
         
         //It’s useful when the structure of paymentDetails is not fixed (varies for different payment methods like bKash, PayPal, etc.). //if pay in bkash then response {
-        //     "paymentID": "TRX123456",
-        //     "payerReference": "017xxxxxxxx",
-        //     "transactionStatus": "Completed",
-        //     "amount": 500
+            // "paymentID": "TRX123456",
+            // "payerReference": "017xxxxxxxx",
+            // "transactionStatus": "Completed",
+            // "amount": 500
         // }
     },
 
