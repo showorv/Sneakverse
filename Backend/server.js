@@ -8,7 +8,7 @@ import cartRouter from "./routes/cartRoute.js"
 import checkoutRouter from "./routes/checkoutRoute.js"
 import orderRouter from "./routes/orderRoute.js"
 import uploadRouter from "./routes/uploadRoute.js"
-
+import adminRoute from "./routes/adminRoute.js"
 const app = express()
 
 app.use(cors())
@@ -43,6 +43,10 @@ app.use("/api/order",orderRouter)
 /// image upload of cloudinary
 
 app.use("/api/upload", uploadRouter)
+
+// admin route
+
+app.use("/api/admin",adminRoute)
 
 app.get("/" , (req,res)=>{
     res.send("hello backend")
