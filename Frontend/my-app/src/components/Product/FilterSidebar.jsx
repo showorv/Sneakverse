@@ -8,6 +8,7 @@ export const FilterSidebar = () => {
     //filtering
 
     const [filters, setFilters] = useState({
+        collections:[],
         catagory:"",
         size:[],
         colors:"",
@@ -24,6 +25,7 @@ export const FilterSidebar = () => {
     const size = ["39","40","41","42","43","44"]
     const colors= ["Red","Black","White","Blue"]
     const brand= ["Nike","Adidas","New Balance","Vans"]
+    const collections = ["stock","pre-order"]
 
     //useeffect for url
 
@@ -35,6 +37,7 @@ export const FilterSidebar = () => {
             colors: params.colors || "",
             size: params.size? params.size.split(",") : [] , // use for an array and  multiple sizes are passed in a comma-separated 
             brand: params.brand? params.brand.split(",") : [] ,
+            collections: params.collections? params.collections.split(","): [],
             minPrice: params.minPrice  || 0,
             maxPrice:params.maxPrice || 6000
         })
@@ -100,6 +103,24 @@ export const FilterSidebar = () => {
   return (
     <div className="p-4">
         <h3 className='text-xl raleway font-bold text-black mb-6'>Filter</h3>
+        <div className='mb-5'>
+            <label className='block mb-2 text-black text-md font-medium'>Collection:</label>
+           {collections.map((col,index)=>{
+            return(
+                <div className='flex items-center mb-1 ml-3'>
+                    
+                    <input key={index} type="checkbox"
+                     name="collections" 
+                     value={col}
+                    onChange={handleFilterChange}
+                     checked={filters.collections.includes(col)}
+                    className='mr-2 h-4 w-4 text-blue-300 focus:ring-blue-700 border-gray-600'
+                    />
+                    <span className='text-black'>{col}</span>
+                </div>
+            )
+           })}
+        </div>
         <div className='mb-5'>
             <label className='block mb-2 text-black text-md font-medium'>Catagory:</label>
            {catagory.map((cata)=>{

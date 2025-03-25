@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import { registrationUser } from '../redux/authSlice.js';
+import {useDispatch} from "react-redux"
 
 export const Register = () => {
+
   const [user, setUser] = useState({
-    username:"",
+    name:"",
     email: "",
     password: ""
   });
+
+  const dispatch = useDispatch()
 
   const handleUser = (e) => {
     const { name, value } = e.target;
@@ -18,6 +23,7 @@ export const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
+    dispatch(registrationUser(user))
   };
 
   return (
@@ -32,15 +38,15 @@ export const Register = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-600">Username:</label>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-600">name:</label>
             <input 
               type="text" 
-              name="username" 
-              id="username" 
+              name="name" 
+              id="name" 
               required 
-              placeholder="Enter your username" 
+              placeholder="Enter your name" 
               autoComplete="off" 
-              value={user.username} 
+              value={user.name} 
               onChange={handleUser} 
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />

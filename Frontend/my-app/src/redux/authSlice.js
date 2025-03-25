@@ -46,10 +46,11 @@ export const loginUser = createAsyncThunk("auth/loginUser", async (userData, { r
 export const registrationUser = createAsyncThunk( "auth/registrationUser", async( userData, {rejectWithValue})=>{
     try {
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/register`, userData)
-        localStorage.setItem("userInfo", JSON.stringify(response.data.user))
+        const userDataToStore = response.data.user || response.data;
+        localStorage.setItem("userInfo", JSON.stringify(userDataToStore))
         localStorage.setItem("userToken", response.data.token) // to save the user token
 
-        return response.data.user // return the user object from response
+        return userDataToStore// return the user object from response
     } catch (error) {
         return rejectWithValue(error.response.data)
     }
