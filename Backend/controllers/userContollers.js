@@ -41,7 +41,7 @@ const login = async (req,res)=>{
         const userExist = await User.findOne({email});
 
         if(!userExist){
-            return res.status(404).json({mssgs: "Invalid Credentials"})
+            return res.status(404).json({mssgs: "Invalid credientials "})
         }
 
         const passCheck = await userExist.comparePassword(password)
@@ -55,7 +55,7 @@ const login = async (req,res)=>{
             )
         }else{
             res.status(400).json(
-                {messgs:"Invalid credientials"}
+                {messgs:"Invalid credientials "}
             )
         }
     } catch (error) {

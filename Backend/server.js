@@ -11,6 +11,12 @@ import uploadRouter from "./routes/uploadRoute.js"
 import adminRoute from "./routes/adminRoute.js"
 const app = express()
 
+// const corsOptions = {
+//     origin: 'http://localhost:5173',
+//     methods: " POST, GET, DELETE, PATCH,PUT, HEAD",
+//     credentials: true
+// }
+
 app.use(cors())
 
 // use json before router for handle json data in req body

@@ -21,6 +21,7 @@ import { ProductManege } from './components/Admin/ProductManege'
 import { EditProduct } from './components/Admin/EditProduct'
 import { OrderManage } from './components/Admin/OrderManage'
 
+
 export const App = () => {
 
   const router = createBrowserRouter([
@@ -117,6 +118,8 @@ export const App = () => {
     }
   ])
   return (
-    <RouterProvider router={router}></RouterProvider>
+    
+      <RouterProvider router={router}></RouterProvider>
+ 
   )
 }

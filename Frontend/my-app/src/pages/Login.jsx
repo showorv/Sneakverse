@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { loginUser } from '../redux/authSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Login = () => {
+
   const [user, setUser] = useState({
     email: "",
     password: ""
   });
+
+  const dispatch = useDispatch()
+  const { loading, error } = useSelector(state => state.auth);
+
 
   const handleUser = (e) => {
     const { name, value } = e.target;
@@ -16,7 +23,7 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
+    dispatch(loginUser(user))
   };
 
   return (
@@ -58,11 +65,13 @@ export const Login = () => {
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
             />
           </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <button 
             type="submit" 
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300 cursor-pointer"
+            disabled={loading}
           >
-            Log In
+            {loading ? "Login in":"Log In"}
           </button>
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
