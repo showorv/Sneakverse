@@ -1,6 +1,3 @@
-import Product from "../model/ProductModel.js"
-import CartItem from "../model/CartModel.js"
-import Checkout from "../model/checkoutModel.js"
 import Order from "../model/orderModel.js"
 
 // logedin user order in profie

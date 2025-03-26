@@ -26,7 +26,7 @@ const createCheckout = async (req,res)=>{
             paymentStatus: "pending"
         })
 
-        console.log(`checkout for ${req.user._id}`);
+        // console.log(`checkout for ${req.user._id}`);
 
         res.status(201).json(newCheckout);
     } catch (error) {
