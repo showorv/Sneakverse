@@ -122,7 +122,7 @@ const productsSlice = createSlice({
 
         builder.addCase(fetchProductByFilter.rejected, (state,action)=>{
             state.loading = false
-            state.error = action.error.message || "something wrong"
+            state.error = action.payload.message || "something wrong"
         })
 
         //handle fetch for single
@@ -138,7 +138,7 @@ const productsSlice = createSlice({
 
         builder.addCase(fetchProductDetails.rejected, (state,action)=>{
             state.loading = false
-            state.error = action.error.message || "something wrong"
+            state.error = action.payload.message || "something wrong"
         })
 
         // handle fetch for update product
@@ -159,7 +159,7 @@ const productsSlice = createSlice({
 
         builder.addCase(updateProduct.rejected, (state,action)=>{
             state.loading = false
-            state.error = action.error.message || "something wrong"
+            state.error = action.payload.message || "something wrong"
         })
 
 
@@ -177,7 +177,7 @@ const productsSlice = createSlice({
 
         builder.addCase(fetchSimilarProducts.rejected, (state,action)=>{
             state.loading = false
-            state.error = action.error.message || "something wrong"
+            state.error = action.payload.message || "something wrong"
         })
     }
 })
