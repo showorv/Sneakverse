@@ -58,7 +58,7 @@ const orderSlice = createSlice({
         })
         builder.addCase(fetchUserOrder.rejected, (state,action)=>{
             state.loading = false
-            state.error = action.payload.message
+            state.error = action.payload.message || "error in fetch user order"
         })
 
         // order details
@@ -72,7 +72,7 @@ const orderSlice = createSlice({
         })
         builder.addCase(fetchOrderDetails.rejected, (state,action)=>{
             state.loading = false
-            state.error = action.payload.message
+            state.error = action.payload.message || "error in fetch user order details"
         })
 
     }
