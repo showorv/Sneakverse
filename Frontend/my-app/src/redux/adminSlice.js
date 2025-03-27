@@ -106,7 +106,7 @@ const adminSlice = createSlice({
         })
         builder.addCase(createUser.fulfilled, (state,action)=>{
             state.loading = false
-            state.users.push(action.payload.user) //If your backend sends { success: true, user: { ... } }, then action.payload.user exists.
+            state.users.push(action.payload.user) //add a new user to the state.If your backend sends { success: true, user: { ... } }, then action.payload.user exists.
 
 
         })
