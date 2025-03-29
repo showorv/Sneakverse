@@ -93,8 +93,8 @@ useEffect(()=>{
             <Link to={`/productDetails/${shoe.id}`} >
             <div className="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col ">
               <img 
-                src={shoe.image} 
-                alt={shoe.name} 
+                src={shoe.images[0]?.url} 
+                alt={shoe.images[0]?.altText || shoe.name} 
                 className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover rounded-lg mb-4 hover:scale-105 transition-all duration-300" 
               />
               <h2 className="text-xs sm:text-md md:text-lg font-semibold text-white ">{shoe.name}</h2>

@@ -1,61 +1,70 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Productgrid } from './Productgrid'
-
+import { fetchProductByFilter,fetchSimilarProducts } from '../../redux/productSlice'
+import {useDispatch, useSelector} from "react-redux"
+import { addToCart } from '../../redux/cartSlice'
 
 //dummy data 
 
-const selectedProduct = {
-    name:"Jordan",
-    price:"120",
-    originalPrice:"150",
-    description:"this is a stylish shoe hediwfnbdsbcvdkbvkdvbkcbvkcbvkc cvifbnvfnvkfnviofv fvifbniov f vfibvfkv fiv bf vofi vdoifbv",
-    brand:"Jordan Air",
-    sizes:["S","M","L","XL"],
+// const selectedProduct = {
+//     name:"Jordan",
+//     price:"120",
+//     originalPrice:"150",
+//     description:"this is a stylish shoe hediwfnbdsbcvdkbvkdvbkcbvkcbvkc cvifbnvfnvkfnviofv fvifbniov f vfibvfkv fiv bf vofi vdoifbv",
+//     brand:"Jordan Air",
+//     sizes:["S","M","L","XL"],
     
-    colors:["Red","Black"],
-    images:[
-        {
-            url:"https://picsum.photos/200?random=1",
-            altText:"Air"
-        },
-        {
-            url:"https://picsum.photos/200?random=2",
-            altText:"Air"
-        },
-    ]
-}
+//     colors:["Red","Black"],
+//     images:[
+//         {
+//             url:"https://picsum.photos/200?random=1",
+//             altText:"Air"
+//         },
+//         {
+//             url:"https://picsum.photos/200?random=2",
+//             altText:"Air"
+//         },
+//     ]
+// }
 
 
 //also like dummy data
 
-const related = [
+// const related = [
 
 
-    {
-    _id:1,
-    name:"Product 1",
-    price:"100",
-    images:[{url:'https://picsum.photos/200?random=2'}]
-    },
-    {
-    _id:2,
-    name:"Product 1",
-    price:"100",
-    images:[{url:'https://picsum.photos/200?random=3'}]
-    },
-    {
-    _id:3,
-    name:"Product 1",
-    price:"100",
-    images:[{url:'https://picsum.photos/200?random=4'}]
-    },
+//     {
+//     _id:1,
+//     name:"Product 1",
+//     price:"100",
+//     images:[{url:'https://picsum.photos/200?random=2'}]
+//     },
+//     {
+//     _id:2,
+//     name:"Product 1",
+//     price:"100",
+//     images:[{url:'https://picsum.photos/200?random=3'}]
+//     },
+//     {
+//     _id:3,
+//     name:"Product 1",
+//     price:"100",
+//     images:[{url:'https://picsum.photos/200?random=4'}]
+//     },
     
-]
+// ]
+
 
 export const ProductDetails = () => {
 
+
+    const {id} = useParams()
+    const dispatch = useDispatch()
+    const {selectedProduct,similarProduct, loading,error} = useSelector((state)=> state.products)
+
+    const {guestId, user} = useSelector((state)=> state.auth)
     //image toggle
 
     const [mainImage, setMainImage] = useState("")
@@ -64,6 +73,15 @@ export const ProductDetails = () => {
 
     const [ quantity, setQuantity] = useState(1)
     const [buttonDisable, setButtonDisable] = useState(false)
+
+
+    useEffect(()=>{
+        if(id){
+
+            dispatch(fetchProductByFilter(id))
+            dispatch(fetchSimilarProducts({id}))
+        }
+    },[dispatch,id])
 
     useEffect(()=>{
         if( selectedProduct?.images?.length>0){
@@ -86,15 +104,39 @@ export const ProductDetails = () => {
         }
        setButtonDisable(true)
 
-       setTimeout(() => {
-        toast.success("Product added"),{
-            duration:300
-        }
+    //    setTimeout(() => {
+    //     toast.success("Product added"),{
+    //         duration:300
+    //     }
 
+    //     setButtonDisable(false)
+    //    }, 500);
+
+    dispatch(
+        addToCart({
+            productId: id,
+            quantity,
+            size: selectSize,
+            color: selectedColor, 
+            guestId,
+            userId: user?._id
+        })
+    ).then(()=>{
+        toast.success("Product added to the cart",{
+
+            duration: 3000
+        })
+    }).finally(()=>{
         setButtonDisable(false)
-       }, 500);
+    })
     }
 
+    if(loading){
+        return <p>loading..</p>
+    }
+    if(error){
+        return <p>Error: {error}</p>
+    }
   return (
     <section className='mx-6  md:mx-35 py-5'>
 
@@ -227,7 +269,7 @@ export const ProductDetails = () => {
         <div className='max-w-6xl mx-auto  p-8 rounded-lg'>
             <h2 className='text-xl md:text-2xl font-bold text-center mb-5'>You May Also Like</h2>
 
-            <Productgrid products={related}/>
+            <Productgrid products={similarProduct}/>
         </div>
     </div>
 

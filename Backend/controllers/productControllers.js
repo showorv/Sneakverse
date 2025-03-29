@@ -261,7 +261,7 @@ const preOrderProducts = async( req,res)=>{
 const stockProducts = async( req,res)=>{
 
     try {
-        const stockorder = await Product.find({ collections: "Stock" })
+        const stockorder = await Product.find({ collections: "Stock" }).limit(10)
 
         res.status(200).json(stockorder)
     } catch (error) {
