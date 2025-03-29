@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { Productgrid } from './Productgrid'
-import { fetchProductByFilter,fetchSimilarProducts } from '../../redux/productSlice'
+import { fetchProductDetails,fetchSimilarProducts } from '../../redux/productSlice'
 import {useDispatch, useSelector} from "react-redux"
 import { addToCart } from '../../redux/cartSlice'
 
@@ -61,6 +61,7 @@ export const ProductDetails = () => {
 
 
     const {id} = useParams()
+    console.log("Product ID from URL:", id);
     const dispatch = useDispatch()
     const {selectedProduct,similarProduct, loading,error} = useSelector((state)=> state.products)
 
@@ -74,14 +75,15 @@ export const ProductDetails = () => {
     const [ quantity, setQuantity] = useState(1)
     const [buttonDisable, setButtonDisable] = useState(false)
 
-
-    useEffect(()=>{
-        if(id){
-
-            dispatch(fetchProductByFilter(id))
-            dispatch(fetchSimilarProducts({id}))
-        }
-    },[dispatch,id])
+    
+    
+        useEffect(()=>{
+            if(id){
+                dispatch(fetchProductDetails(id))
+                dispatch(fetchSimilarProducts({id}))
+            }
+        },[dispatch, id])
+    
 
     useEffect(()=>{
         if( selectedProduct?.images?.length>0){
@@ -97,9 +99,9 @@ export const ProductDetails = () => {
     const handleAddToCart = ()=>{
 
         if(!selectSize && !selectedColor){
-            toast.error("Please select color and size"),{
+            toast.error("Please select color and size",{
                 duration:300
-            }
+            })
            return
         }
        setButtonDisable(true)
@@ -114,7 +116,7 @@ export const ProductDetails = () => {
 
     dispatch(
         addToCart({
-            productId: id,
+            productId:fetchId,
             quantity,
             size: selectSize,
             color: selectedColor, 
@@ -143,7 +145,10 @@ export const ProductDetails = () => {
         <div className='text-3xl font-bold'>
             <NavLink to="/">Home</NavLink>
         </div>
+       
     <div className='p-10'>
+    {selectedProduct && (
+
         <div className='max-w-6xl mx-auto bg-gray-800 p-8 rounded-lg'>
             {/* left side */}
             <div className='flex flex-col md:flex-row'>
@@ -264,13 +269,15 @@ export const ProductDetails = () => {
                 </div>
 
             </div>
-        </div>
+       
 
         <div className='max-w-6xl mx-auto  p-8 rounded-lg'>
             <h2 className='text-xl md:text-2xl font-bold text-center mb-5'>You May Also Like</h2>
 
-            <Productgrid products={similarProduct}/>
+            <Productgrid products={similarProduct} loading={loading} error={error}/>
         </div>
+    </div>
+    )}
     </div>
 
     </section>

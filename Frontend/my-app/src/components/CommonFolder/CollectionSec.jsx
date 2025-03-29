@@ -86,7 +86,7 @@ export default function CollectionSec() {
       >
         {collection.map((shoe) => (
           <SwiperSlide key={shoe.id}>
-            <Link to={`/productDetails/${shoe.id}`}>
+            <Link to={`/productDetails/${shoe._id}`}>
 
             <div className="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col items-center">
               <img 
