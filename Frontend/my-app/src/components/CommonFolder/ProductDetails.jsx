@@ -61,7 +61,7 @@ export const ProductDetails = () => {
 
 
     const {id} = useParams()
-    console.log("Product ID from URL:", id);
+    // console.log("Product ID from URL:", id);
     const dispatch = useDispatch()
     const {selectedProduct,similarProduct, loading,error} = useSelector((state)=> state.products)
 

@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { IoIosSearch } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchProductByFilter, setFilters } from '../../redux/productSlice';
 
 
 
@@ -8,6 +11,11 @@ export const Search = () => {
 
     const [search, setSearch] = useState()
     const [ isOpen, setIsOpen] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
+
 
     const handleSearchToggle =()=>{
         setIsOpen(!isOpen)
@@ -15,7 +23,9 @@ export const Search = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        console.log("search item", search);
+        dispatch(setFilters({search: search}))
+        dispatch(fetchProductByFilter({search: search}))
+        navigate(`/products/all?search=${search}`)
 
         setIsOpen(false)
     }

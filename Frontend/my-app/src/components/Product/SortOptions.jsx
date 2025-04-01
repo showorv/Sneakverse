@@ -1,16 +1,22 @@
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
-
+import { useDispatch } from 'react-redux'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { fetchProductByFilter, setFilters } from '../../redux/productSlice';
 export const SortOptions = () => {
 
+ 
   const [searchParams, setSearchParams] = useSearchParams()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSortChange = (e)=>{
 
     const sortBy = e.target.value
-
     searchParams.set("sortBy", sortBy)
     setSearchParams(searchParams)
+    dispatch(setFilters({sortBy: searchParams}))
+    dispatch(fetchProductByFilters({sortBy: searchParams}))
+   
   }
   return (
     <div className='mb-4 flex itemc justify-end'>

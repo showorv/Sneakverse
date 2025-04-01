@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { useDispatch } from 'react-redux';
-import { deleteItem, updateCartItemQuantity } from '../../redux/cartSlice';
+import { deleteItem, fetchCart, updateCartItemQuantity } from '../../redux/cartSlice';
 
 
 export const CartContents = ({cart, guestId,userId}) => {
@@ -36,6 +36,14 @@ export const CartContents = ({cart, guestId,userId}) => {
    
     dispatch(deleteItem(payload))
   }
+
+  useEffect(() => {
+    const guestId = localStorage.getItem("guestId");
+    const userId = localStorage.getItem("userId");
+    
+    dispatch(fetchCart({ guestId, userId }));
+  }, [dispatch]);
+
     // const cartcomponents =  [
     //     {
     //       id: 1,

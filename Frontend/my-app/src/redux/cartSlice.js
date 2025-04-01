@@ -7,7 +7,7 @@ import { updateProduct } from "./productSlice";
 const getCartFromLocal = ()=>{
 
     const storedCart = localStorage.getItem("cart")
-    return storedCart ? JSON.stringify(storedCart) : { products:[]}
+    return storedCart ? JSON.parse(storedCart) : { products:[]}
 }
 
 const saveCartToLocal = (cart) =>{
