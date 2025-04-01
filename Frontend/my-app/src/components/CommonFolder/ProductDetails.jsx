@@ -100,7 +100,7 @@ export const ProductDetails = () => {
 
         if(!selectSize && !selectedColor){
             toast.error("Please select color and size",{
-                duration:300
+                duration:3000
             })
            return
         }
@@ -116,7 +116,7 @@ export const ProductDetails = () => {
 
     dispatch(
         addToCart({
-            productId:fetchId,
+            productId:id,
             quantity,
             size: selectSize,
             color: selectedColor, 

@@ -86,8 +86,8 @@ export default function BestSell() {
         className="mySwiper"
       >
         {bestSell.map((shoe) => (
-          <SwiperSlide key={shoe.id}>
-            <Link to={`/productDetails/${shoe.id}`}>
+          <SwiperSlide key={shoe._id}>
+            <Link to={`/productDetails/${shoe._id}`}>
 
             <div className="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col items-center">
               <img 
