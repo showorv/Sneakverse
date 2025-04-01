@@ -3,13 +3,24 @@ import { IoFilter } from "react-icons/io5";
 import { FilterSidebar } from '../components/Product/FilterSidebar';
 import { Productgrid } from '../components/CommonFolder/Productgrid';
 import { SortOptions } from '../components/Product/SortOptions';
-
+import { useParams, useSearchParams } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux"
+import { fetchProductByFilter } from '../redux/productSlice';
 
 export const Products = () => {
-
-  const [products, setProducts] = useState([])
+  const {collection} = useParams()
+  const [searchParams] = useSearchParams()
+  const dispatch = useDispatch()
+  const queryParams = Object.fromEntries([...searchParams])
+  const {products, loading, error} = useSelector((state)=> state.products);
+  // const [products, setProducts] = useState([])
   const sidebarRef = useRef(null);
   const [isSidebarOpen, setIsSideBarOpen] = useState(false)
+
+
+  useEffect(()=>{
+    dispatch(fetchProductByFilter({collection, ...queryParams}))
+  },[dispatch,collection,searchParams])
 
   const toggleOpen =()=>{
     setIsSideBarOpen(!isSidebarOpen);
@@ -34,46 +45,7 @@ export const Products = () => {
     };
   },[])
 
-  useEffect(()=>{
-      //for dummy data
-
-      setTimeout(() => {
-        
-        const fetchedProduct = [
-          {
-            _id:1,
-            name:"Product 1",
-            price:"100",
-            images:[{url:'https://picsum.photos/200?random=2'}]
-            },
-            {
-            _id:2,
-            name:"Product 1",
-            price:"100",
-            images:[{url:'https://picsum.photos/200?random=3'}]
-            },
-            {
-            _id:3,
-            name:"Product 1",
-            price:"100",
-            images:[{url:'https://picsum.photos/200?random=4'}]
-            },
-            {
-            _id:3,
-            name:"Product 1",
-            price:"100",
-            images:[{url:'https://picsum.photos/200?random=4'}]
-            },
-            {
-            _id:3,
-            name:"Product 1",
-            price:"100",
-            images:[{url:'https://picsum.photos/200?random=4'}]
-            },
-        ]
-        setProducts(fetchedProduct)
-      }, 1000);
-  },[])
+ 
   return (
     <div className='flex flex-col lg:flex-row '>
       {/* for mobile filtering */}
@@ -96,7 +68,7 @@ export const Products = () => {
         {/* products */}
         <div className='mr-2 sm:mr-3 md:mr-4 lg:mr-30'>
 
-        <Productgrid products={products} />
+        <Productgrid products={products} loading={loading} error={error}/>
         </div>
       </div>
     </div>

@@ -100,7 +100,7 @@ export const ProductDetails = () => {
 
         if(!selectSize && !selectedColor){
             toast.error("Please select color and size",{
-                duration:3000
+                duration:1000
             })
            return
         }
@@ -126,7 +126,7 @@ export const ProductDetails = () => {
     ).then(()=>{
         toast.success("Product added to the cart",{
 
-            duration: 3000
+            duration: 1000
         })
     }).finally(()=>{
         setButtonDisable(false)

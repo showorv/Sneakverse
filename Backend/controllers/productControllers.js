@@ -113,7 +113,7 @@ const allProducts = async (req,res) =>{
         //filter logic
 
         if( collections && collections.toLocaleLowerCase()!== "all"){
-            query.collection = collections
+            query.collections = collections
         }
         if( category && category.toLocaleLowerCase()!== "all"){
             query.category = category
@@ -123,11 +123,11 @@ const allProducts = async (req,res) =>{
             query.brand = {$in: brand.split(",")}
         }
         if(sizes){
-            query.size = {$in: sizes.split(",")}
+            query.sizes = {$in: sizes.split(",")}
         }
 
         if (colors) {
-            query.color = { $in: colors.split(",") }; 
+            query.colors = { $in: colors.split(",") }; 
         }
 
         if( minPrice || maxPrice){

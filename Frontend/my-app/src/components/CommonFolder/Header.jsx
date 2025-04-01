@@ -6,6 +6,7 @@ import { CgMenuLeft } from "react-icons/cg";
 import { Search } from './Search';
 import { CartDrawer } from './CartDrawer';
 import { MdOutlineCancel } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 
 
@@ -15,6 +16,9 @@ export const Header = () => {
 
     const [ drawerOpen , setDrawerOpen] = useState(false)
     const [hambarOpen, setHambarOpen] = useState(false)
+    const {cart} = useSelector((state)=> state.cart)
+
+    const cartItem = cart?.products?.reduce((total,product)=> total+product.quantity,0) || 0
 
     const handleToggleDrawer = ()=>{
         setDrawerOpen(!drawerOpen)
@@ -67,7 +71,10 @@ export const Header = () => {
 
       <button onClick={handleToggleDrawer} className='relative'>
       <FiShoppingCart className="h-5 w-5 cursor-pointer"/>
-      <span className='absolute -top-3 bg-red-600 text-white text-xs rounded-full px-2 py-0.5'>4</span>
+      {cartItem >= 0 && (
+        <span className='absolute -top-3 bg-red-600 text-white text-xs rounded-full px-2 py-0.5'>{cartItem}</span>
+      )}
+      
       </button>
 
       {/* search */}
@@ -99,7 +106,7 @@ export const Header = () => {
 
       <div className='flex flex-col space-y-6 justify-center items-center mt-10'>
     <NavLink to="/" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Home</NavLink>
-    <NavLink to="/products" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Products</NavLink>
+    <NavLink to="/products/all" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Products</NavLink>
     <NavLink to="/about" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>About Us</NavLink>
     <NavLink to="/contact" className="text-sm font-medium uppercase playfair text-gray-200 hover:text-black" style={active} onClick={handleHambarOpen}>Contact us</NavLink>
     <NavLink to="/admin" className="block bg-white text-black font-semibold text-sm py-1 px-3 rounded-full"   

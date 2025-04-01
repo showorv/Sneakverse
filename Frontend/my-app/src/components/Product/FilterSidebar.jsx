@@ -25,7 +25,7 @@ export const FilterSidebar = () => {
     const size = ["39","40","41","42","43","44"]
     const colors= ["Red","Black","White","Blue"]
     const brand= ["Nike","Adidas","New Balance","Vans"]
-    const collections = ["stock","pre-order"]
+    const collections = ["Stock","pre-order"]
 
     //useeffect for url
 

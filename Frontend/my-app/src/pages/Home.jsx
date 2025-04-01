@@ -76,6 +76,12 @@ export const Home = () => {
         <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
       </div>
       <ShoeCardSlider />
+      <NavLink to="/products/all?collections=pre-order">
+
+      <div className="flex justify-center items-center my-4 ">
+        <button className="border border-white px-4 py-1 cursor-pointer transition duration-300 hover:bg-white hover:text-black ">View All</button>
+      </div>
+      </NavLink>
     </div>
 
     {/* collection section  */}
@@ -86,6 +92,12 @@ export const Home = () => {
         <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
       </div>
       <CollectionSec />
+      <NavLink to="/products/all?collections=Stock">
+
+      <div className="flex justify-center items-center my-4 ">
+        <button className="border border-white px-4 py-1 cursor-pointer transition duration-300 hover:bg-white hover:text-black ">View All</button>
+      </div>
+      </NavLink>
     </div>
    
     {/* best selling shoes */}
@@ -95,6 +107,7 @@ export const Home = () => {
         <p className='text-xs mx-4 text-center md:text-md '> Secure your next grail. Sneaker pre-orders available.</p>
       </div>
       <BestSell />
+      
     </div>
 
   

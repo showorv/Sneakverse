@@ -39,6 +39,7 @@ export const addToCart = createAsyncThunk ("cart/addToCart" , async({productId, 
             quantity,
             size,
             color, 
+            
             guestId,
             userId
         })
@@ -71,23 +72,26 @@ export const updateCartItemQuantity = createAsyncThunk("cart/updateCartItemQuant
 })
 
 // remove item in the cart
-
-export const deleteItem = createAsyncThunk("cart/deleteItem", async({productId, quantity,size,color, guestId,userId},{rejectWithValue})=>{
-    try {
-        const response = await axios({  //axios(config) uses there
-            method:"DELETE",
-            url: `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
-            data: {productId, quantity,size,color, guestId,userId}
-
+export const deleteItem = createAsyncThunk(
+    "cart/deleteItem",
+    async (payload, { rejectWithValue }) => {
+      try {
+       
         
-        })
-
-        return response.data
-    } catch (error) {
-        return rejectWithValue(error.response.data)
+        const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: payload,  // ✅ Send payload directly
+        });
+  
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response?.data || "An error occurred");
+      }
     }
-})
-
+  );
+  
 
 
 // merge guest card into loggedin user card
@@ -177,7 +181,7 @@ const cartSlice = createSlice({
         })
         builder.addCase(deleteItem.fulfilled, (state,action)=>{
             state.loading = false
-            state.cart = action.payload
+            state.cart= action.payload
             saveCartToLocal(action.payload)
         })
         builder.addCase(deleteItem.rejected, (state,action)=>{

@@ -12,14 +12,17 @@ const getCart = async (guestId,userId)=>{
         return await CartItem.findOne({guestId})|| null
     }
     return null;
+
+    
 }
 
 // add a product to the cart for guest or logged in user
 
 const cartProduct = async (req,res)=>{
 
+   
     const {productId, quantity,size,color, guestId,userId} = req.body
-
+   
 
     try {
         
@@ -50,7 +53,7 @@ const cartProduct = async (req,res)=>{
                 cart.products.push({
                     productId,
                     name: product.name,
-                    Image: product.images,
+                    image: product.images[0].url,
                     price: product.price,
                     size,
                     color,
@@ -147,7 +150,8 @@ const updateCart = async (req,res)=>{
 // delete product from cart
 
 const deleteProduct = async (req,res)=>{
-    const {productId, quantity,size,color, guestId,userId} = req.body
+    // console.log("🔥 Received DELETE request with:", req.body);
+    const {productId, size,color, guestId,userId} = req.body
 
     try {
 
@@ -169,7 +173,7 @@ const deleteProduct = async (req,res)=>{
           cart.products.splice( productIndex,1) 
             
 
-            cart.totalPrice = cart.products.reduce((acc,item)=> acc+ item.price * item.quantity,0);
+            cart.totalPrice = cart.products.reduce((acc,item)=> acc + item.price * item.quantity,0);
 
             await cart.save()
             res.status(200).json(cart)
