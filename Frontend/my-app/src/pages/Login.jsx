@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { loginUser } from '../redux/authSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom'
+import {useNavigate} from "react-router-dom"
+import { mergeItem } from '../redux/cartSlice.js';
 
 export const Login = () => {
 
-  const [user, setUser] = useState({
+  const [users, setUser] = useState({
     email: "",
     password: ""
   });
 
   const dispatch = useDispatch()
   const { loading, error } = useSelector(state => state.auth);
+  const {cart} = useSelector((state)=> state.cart)
+  const location = useLocation()
+  const {guestId,user} = useSelector((state)=> state.auth)
+  const navigate = useNavigate()
+
+
+  // get redirect parameter and check if its checkout or something
+  const redirect = new URLSearchParams(location.search).get("redirect") || "/"
+  const isCheckoutRedirect = redirect.includes("checkout")
 
 
   const handleUser = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value
-    });
+    setUser({ ...users, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(user))
+    try {
+      const result = await dispatch(loginUser(users)).unwrap(); // Wait for login to succeed
+      if (result) {
+        if (cart?.products.length > 0) {
+          await dispatch(mergeItem({ guestId, user }));
+        }
+        navigate(isCheckoutRedirect ? "/checkout" : "/");
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
-
   return (
     <section className="min-h-screen flex items-center justify-center bg-[#131313] px-4 mt-5 md:mt-0">
       <div className="w-full max-w-md bg-[#131313] border p-6 rounded-lg shadow-lg">
@@ -46,7 +63,7 @@ export const Login = () => {
               required 
               placeholder="Enter your email" 
               autoComplete="off" 
-              value={user.email} 
+              value={users.email} 
               onChange={handleUser} 
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -60,7 +77,7 @@ export const Login = () => {
               required 
               placeholder="Enter your password" 
               autoComplete="off" 
-              value={user.password} 
+              value={users.password} 
               onChange={handleUser} 
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
             />
@@ -75,7 +92,7 @@ export const Login = () => {
           </button>
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account? <a href="/userregister" className="text-blue-500 hover:underline">Sign Up</a>
+          Don't have an account? <Link className="text-blue-500 hover:underline" to={`/userregister?redirect=${encodeURIComponent(redirect)}`}>Sign Up</Link>
         </p>
       </div>
     </section>

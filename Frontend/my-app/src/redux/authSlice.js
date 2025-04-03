@@ -7,11 +7,14 @@ const userFromStorage = (() => {
     try {
       const userInfo = localStorage.getItem("userInfo");
       return userInfo ? JSON.parse(userInfo) : null;
+      
     } catch (error) {
       console.error("Failed to parse user info from localStorage", error);
       return null;
     }
   })();
+
+  
 
 // check for an existing guest id in localstorage or generate new
 

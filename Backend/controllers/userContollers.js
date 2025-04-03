@@ -50,7 +50,8 @@ const login = async (req,res)=>{
                 {
                     messgs: "Login Successfull",
                     token: await userExist.generateToken(),
-                    userId: userExist._id.toString()
+                    user: { _id: userExist._id, name: userExist.name, email: userExist.email }
+                    
                 }
             )
         }else{

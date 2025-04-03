@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { use, useEffect } from 'react'
 import { MyOrder } from './MyOrder'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout } from '../redux/authSlice'
+import { clearCart } from '../redux/cartSlice'
 
 export const UserProfile = () => {
+    const {user} = useSelector((state)=> state.auth)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(!user){
+            navigate("/userlogin")
+        }
+    },[user,dispatch])
+
+
+    const handleLogout = ()=>{
+
+        dispatch(logout()),
+        dispatch(clearCart()),
+        navigate("/userlogin")
+    }
+    
   return (
    <section className='min-h-screen flex flex-col'>
 
@@ -11,9 +33,9 @@ export const UserProfile = () => {
             {/* left side */}
 
             <div className='w-full md:w-1/3 lg:w-1/4 shadow-lg border rounded-lg p-6'>
-                <h1 className='text-2xl md:text-3xl font-bold text-white mb-3'>Hohn doe</h1>
-                <p className='text-lg text-gray-200 mb-4 '>John@gmail.com</p>
-                <button className='w-full bg-white text-black rounded py-1 px-4 cursor-pointer hover:bg-gray-400'>Logout</button>
+                <h1 className='text-2xl md:text-3xl font-bold text-white mb-3'>{user?.name}</h1>
+                <p className='text-lg text-gray-200 mb-4 '>{user?.email}</p>
+                <button className='w-full bg-white text-black rounded py-1 px-4 cursor-pointer hover:bg-gray-400' onClick={handleLogout}>Logout</button>
             </div>
 
             {/* right side */}
