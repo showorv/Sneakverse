@@ -3,7 +3,7 @@ import User from "../model/UserModel.js";
 
 const register = async(req,res) =>{
       
-    console.log(req.body);
+    
     const {name, email, password} = req.body
     try {
       
@@ -18,7 +18,7 @@ const register = async(req,res) =>{
         res.status(200)
         .json({ message: Userdata, //or "registration successfull"
         token: await Userdata.generateToken(), 
-        userId: Userdata._id.toString() // to string is a best practice in jwt
+        user: { _id: Userdata._id, name: Userdata.name, email: Userdata.email }, // to string is a best practice in jwt
         })
 
     // res.send({name,email,password})

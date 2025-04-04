@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import {useNavigate} from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
 const products = [
   {
     id: 101,
@@ -22,6 +23,11 @@ const products = [
 ];
 
 export const CheckoutPage = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {cart, loading,error} = useSelector((state)=> state.cart)
+  const {user} = useSelector((state)=> state.auth)
+
   const [userDetails, setUserDetails] = useState({
     firstname: '',
     lastname: '',
@@ -29,12 +35,20 @@ export const CheckoutPage = () => {
     city: '',
     address: ''
   });
-  
+  const [checkoutId, setCheckOutId] = useState(null)
   const [deliveryCharge, setDeliveryCharge] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
   const [cashOn, setCashOn] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('full');
 
+  // ensure cart is loaded before processing
+
+  useEffect(()=>{
+    if( !cart || !cart.products || cart.products.length === 0){
+      navigate("/")
+    }
+  },[cart,navigate])
+  
   const handleDetails = (e) => {
     const { name, value } = e.target;
     setUserDetails({ ...userDetails, [name]: value });
@@ -50,6 +64,7 @@ export const CheckoutPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowDetails(true);
+
   };
 
   const handleCashOn = () => {

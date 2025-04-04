@@ -1,29 +1,47 @@
 import React, { useState } from 'react';
 import { registrationUser } from '../redux/authSlice.js';
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { mergeItem } from '../redux/cartSlice.js';
 
 export const Register = () => {
 
-  const [user, setUser] = useState({
+  const [users, setUser] = useState({
     name:"",
     email: "",
     password: ""
   });
 
   const dispatch = useDispatch()
+  const { loading, error } = useSelector(state => state.auth);
+  const {cart} = useSelector((state)=> state.cart)
+  const location = useLocation()
+  const {guestId,user} = useSelector((state)=> state.auth)
+  const navigate = useNavigate()
+
+
+  // get redirect parameter and check if its checkout or something
+  const redirect = new URLSearchParams(location.search).get("redirect") || "/"
+  const isCheckoutRedirect = redirect.includes("checkout")
+
 
   const handleUser = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value
-    });
+    setUser({ ...users, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
-    dispatch(registrationUser(user))
+    try {
+      const result = await dispatch(registrationUser(users)).unwrap(); // Wait for login to succeed
+      if (result) {
+        if (cart?.products.length > 0) {
+          await dispatch(mergeItem({ guestId, user }));
+        }
+        navigate(isCheckoutRedirect ? "/checkout" : "/userlogin");
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   return (
@@ -46,7 +64,7 @@ export const Register = () => {
               required 
               placeholder="Enter your name" 
               autoComplete="off" 
-              value={user.name} 
+              value={users.name} 
               onChange={handleUser} 
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -60,7 +78,7 @@ export const Register = () => {
               required 
               placeholder="Enter your email" 
               autoComplete="off" 
-              value={user.email} 
+              value={users.email} 
               onChange={handleUser} 
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -74,7 +92,7 @@ export const Register = () => {
               required 
               placeholder="Enter your password" 
               autoComplete="off" 
-              value={user.password} 
+              value={users.password} 
               onChange={handleUser} 
               className="w-full p-3 text-xs md:text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -87,7 +105,8 @@ export const Register = () => {
           </button>
         </form>
         <p className="text-center text-sm text-gray-600 mt-4">
-          Already have an account? <a href="/userlogin" className="text-blue-500 hover:underline">Login</a>
+          Already have an account? <Link to={`"/userlogin?redirect=${encodeURIComponent(redirect)}`}
+          className="text-blue-500 hover:underline" >Log In</Link>
         </p>
       </div>
     </section>

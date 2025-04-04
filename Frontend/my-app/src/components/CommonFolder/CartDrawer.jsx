@@ -15,11 +15,15 @@ export const CartDrawer = ({drawerOpen, handleToggleDrawer}) => {
     const {guestId,user} = useSelector((state)=> state.auth)
     const {cart} = useSelector((state)=> state.cart)
     const userId = user? user._id : null
+    
     const navigate = useNavigate()
     const handleCheckout = ()=>{
       handleToggleDrawer()
       if(!userId){
+        
         navigate("/userlogin?redirect=checkout")
+      }else{
+        navigate("/checkout")
       }
     }
   return (
@@ -51,7 +55,7 @@ export const CartDrawer = ({drawerOpen, handleToggleDrawer}) => {
         <div className='p-4 bg-white sticky '>
           {cart && cart?.products?.length > 0 && (
             <>
-                  <button 
+          <button 
           onClick={handleCheckout}
           className='w-full bg-black text-white rounded-lg py-1 font-bold text-sm hover:bg-gray-800 cursor-pointer md:text-lg md:py-2 '>Checkout</button>
           <p className='text-black tracking-tighter my-2 text-xs  text-center font-light md:text-[1rem]'>Shipping, Taxes , Cupon codes calculated in checkout</p>
